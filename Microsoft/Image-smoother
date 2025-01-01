@@ -1,0 +1,82 @@
+//Space Optimization approch 
+leetcode 661-> https://leetcode.com/problems/image-smoother/
+
+class Solution {
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int m = img.size();
+        int n = img[0].size();
+
+        vector<int> temp(n);
+        int prevCorner = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                int sum = 0;
+                int count = 0;
+
+                // Bottom neightbour (i+1)th row
+                if (i + 1 < m) {
+
+                    if (j - 1 >=0){
+                            sum += img[i + 1][j - 1];
+                            count++;
+                        }
+
+                    sum += img[i + 1][j];
+                    count++;
+
+                    if (j + 1 < n) {
+                        sum += img[i + 1][j + 1];
+                        count++;
+                    }
+                }
+
+                // just right neighbour [i][j+1]
+                if (j + 1 < n) {
+                    sum += img[i][j + 1];
+                    count++;
+                }
+
+                //just left neighbour [i][j-1]
+                if(j-1 >= 0){
+                    sum += temp[j-1];
+                    count++;
+                }
+
+                // current cell [i][j]
+                sum += img[i][j];
+                count++;
+
+                // Top neighnors i-1th row
+                if (i - 1 >= 0) {
+                    //[i-1][j-1] -> prevCorner
+                    if (j - 1 >= 0) {
+                        sum += prevCorner;
+                        count++;
+                    }
+
+                    //[i-1][j], [i-1][j+1]
+                    sum += temp[j];
+                    count++;
+
+                    if (j + 1 < n) {
+                        sum += temp[j + 1];
+                        count++;
+                    }
+                }
+                // store prev value of temp
+                if (i - 1 >= 0) {
+                    prevCorner = temp[j];
+                }
+
+                // store current  value [i][j]
+                temp[j] = img[i][j];
+
+                img[i][j] = sum / count;
+            }
+        }
+        return img;
+    }
+};
