@@ -1,0 +1,36 @@
+//  https://leetcode.com/problems/count-number-of-nice-subarrays/
+
+
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        int n = nums.size();
+        int oddCount = 0;       
+        int prevCount = 0;     
+        int result = 0;         
+        int i = 0, j = 0;  
+
+        while (j < n) {
+            // Increment oddCount if nums[j] is odd
+            if (nums[j] % 2 != 0) {
+                oddCount++;
+                prevCount = 0; // Reset prevCount when a new odd number is found
+            }
+
+            // When there are exactly k odd numbers, calculate valid subarrays
+            while (oddCount == k) {
+                prevCount++;
+                if (nums[i] % 2 != 0) {
+                    oddCount--; // Decrease oddCount 
+                }
+                i++;
+            }
+
+            // Add all valid subarrays ending at j
+            result += prevCount;
+            j++;
+        }
+
+        return result;
+    }
+};
