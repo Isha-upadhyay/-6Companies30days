@@ -74,8 +74,7 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 ```
 
 
-
-
+```
 ## 🏆 Achievements
 
 - [ ] Complete all 90 questions.
