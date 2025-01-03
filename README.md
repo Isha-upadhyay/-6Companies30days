@@ -58,19 +58,7 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 
 ---
 
-## 📂 Repository Structure
 
-6Companies30Days/
-├── Microsoft/
-│   ├── Q1_Solution
-│   ├── Q2_Solution
-│   └── ...
-├── Google/
-├── Amazon/
-├── Adobe/
-├── Flipkart/
-├── Amazon/
-├── README.md
 ```
 
 
@@ -84,4 +72,4 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 ## 🤝 Contributions
 
 Feel free to fork this repository, suggest improvements, or submit pull requests to enhance it further. Let’s ace this challenge together! 💪
-```
+---
