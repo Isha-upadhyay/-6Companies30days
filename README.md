@@ -56,13 +56,7 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 - Greedy Algorithms
 - Math and Number Theory
 
----
 
-
-```
-
-
-```
 ## 🏆 Achievements
 
 - [ ] Complete all 90 questions.
