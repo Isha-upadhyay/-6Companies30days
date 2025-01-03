@@ -1,0 +1,55 @@
+//Leetcode->2002. Maximum Product of the Length of Two Palindromic Subsequences
+//https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/
+
+
+class Solution {
+public:
+    bool palindrome(string &s) {
+        int i = 0;
+        int j = s.length() - 1;
+        while (i < j) {
+            if (s[i] != s[j])
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    int maxProduct(string s) {
+        int n = s.length();
+        int mask = 1 << n;
+        vector<pair<string, int>> pSubs;
+        
+        // Generate all subsequences and check if they are palindromes
+        for (int i = 0; i < mask; i++) {
+            string s2 = "";
+            for (int j = 0; j < n; j++) {
+                if ((1 << j) & i) {
+                    s2.push_back(s[j]);
+                }
+            }
+            if (palindrome(s2)) {
+                pSubs.push_back({s2, i});
+            }
+        }
+        
+        int x = pSubs.size();
+        int maxProduct = 0;
+        
+        
+        for (int i = 0; i < x; i++) {
+            for (int j = i + 1; j < x; j++) {
+                int mask1 = pSubs[i].second;
+                int mask2 = pSubs[j].second;
+                
+                if ((mask1 & mask2) == 0) {
+                    int product = pSubs[i].first.size() * pSubs[j].first.size();
+                    maxProduct = max(maxProduct, product);
+                }
+            }
+        }
+        
+        return maxProduct;
+    }
+};
