@@ -81,7 +81,7 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 - [ ] Improve coding efficiency and logic-building.
 - [ ] Build a strong foundation for company-specific coding interviews.
 
-
 ## 🤝 Contributions
 
 Feel free to fork this repository, suggest improvements, or submit pull requests to enhance it further. Let’s ace this challenge together! 💪
+```
