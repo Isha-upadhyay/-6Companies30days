@@ -1,0 +1,60 @@
+//https://leetcode.com/problems/shopping-offers/description/
+//Shopping Offers
+
+class Solution {
+public:
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special,
+                       vector<int>& needs) {
+        unordered_map<vector<int>, int, VectorHash> memo;
+        return shopping(price, special, needs, memo);
+    }
+
+private:
+    struct VectorHash {
+        size_t operator()(const vector<int>& v) const {
+            size_t hash = 0;
+            for (int n : v) {
+                hash ^= hash * 31 + hash + n;
+            }
+            return hash;
+        }
+    };
+
+    int shopping(vector<int>& price, vector<vector<int>>& special,
+                 vector<int>& needs,
+                 unordered_map<vector<int>, int, VectorHash>& memo) {
+        if (memo.count(needs)) {
+            return memo[needs];
+        }
+
+        // Cost without any special offer
+        int res = dot(needs, price);
+
+        // Try each special offer
+        for (const auto& s : special) {
+            vector<int> clone = needs;
+            int j;
+            for (j = 0; j < needs.size(); j++) {
+                int diff = clone[j] - s[j];
+                if (diff < 0) { // Can't use this special offer
+                    break;
+                }
+                clone[j] = diff;
+            }
+            if (j == needs.size()) { // Valid special offer
+                res = min(res, s[j] + shopping(price, special, clone, memo));
+            }
+        }
+
+        memo[needs] = res;
+        return res;
+    }
+
+    int dot(const vector<int>& a, const vector<int>& b) {
+        int sum = 0;
+        for (size_t i = 0; i < a.size(); i++) {
+            sum += a[i] * b[i];
+        }
+        return sum;
+    }
+};
