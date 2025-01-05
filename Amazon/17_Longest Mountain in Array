@@ -1,0 +1,32 @@
+//845. Longest Mountain in Array
+//https://leetcode.com/problems/longest-mountain-in-array/description/
+
+class Solution {
+public:
+    int longestMountain(vector<int>& arr) {
+        int n=arr.size(),res=0,answer=0;
+        bool wasInc=false;
+        bool wasIncAndNowDcr=false;
+        for(int i=1;i<n;i++){
+            if(arr[i] > arr[i-1]){
+                if(wasIncAndNowDcr==true){
+                    answer=0;
+                    wasIncAndNowDcr=false;
+                }
+                answer++;
+                wasInc=true;
+            } 
+            else if(arr[i] < arr[i-1] && (wasInc || wasIncAndNowDcr)){
+                answer++;
+                wasIncAndNowDcr=true;
+                res=max(res,answer+1);
+            }
+            else if(arr[i]==arr[i-1]){
+                answer=0;
+                wasIncAndNowDcr=false;
+                wasInc=false;
+            }
+        }
+        return res;
+    }
+};
