@@ -1,0 +1,40 @@
+
+class Solution {
+  public:
+
+    // Function to construct the parenthesized order
+string constructOrder(int i, int j, vector<vector<int>>& brackets) {
+    if (i == j) return string(1, 'A' + i - 1); // Convert i to corresponding matrix character
+    int k = brackets[i][j]; // Optimal split point
+    string left = constructOrder(i, k, brackets);
+    string right = constructOrder(k + 1, j, brackets);
+    return "(" + left + right + ")";
+}
+    string matrixChainOrder(vector<int> &arr) {
+        // code here
+        int n = arr.size(); // Number of matrices = n-1
+    vector<vector<int>> dp(n, vector<int>(n, 0));       // DP table for minimum cost
+    vector<vector<int>> brackets(n, vector<int>(n, 0)); // To store the split points
+
+    // Fill DP table
+    for (int length = 2; length < n; ++length) { // length of the chain
+        for (int i = 1; i < n - length + 1; ++i) {
+            int j = i + length - 1;
+            dp[i][j] = INT_MAX;
+            for (int k = i; k < j; ++k) {
+                int cost = dp[i][k] + dp[k + 1][j] + arr[i - 1] * arr[k] * arr[j];
+                if (cost < dp[i][j]) {
+                    dp[i][j] = cost;
+                    brackets[i][j] = k; // Store split point
+                }
+            }
+        }
+    }
+
+    // Construct the optimal order
+    return constructOrder(1, n - 1, brackets);
+    }
+};
+
+
+
