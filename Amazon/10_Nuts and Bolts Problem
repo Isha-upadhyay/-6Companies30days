@@ -1,0 +1,20 @@
+
+class Solution {
+  public:
+
+    void matchPairs(int n, char nuts[], char bolts[]) {
+        // code here
+          if(n == 1) return;
+        map<char, int> mpp;
+        for(int i = 0; i < n; i++){
+            mpp[nuts[i]]++;
+        }
+        int i = 0;
+        for(auto it = mpp.begin(); it != mpp.end(); it++){
+            nuts[i] = it->first;
+            bolts[i] = it->first;
+            i++;
+        }
+    }
+};
+
