@@ -1,0 +1,58 @@
+class Solution {
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int time = 0; 
+        int fresh = 0;
+        queue<pair<int,int>> q;
+        for(int i = 0 ; i<m ; i++){ //Store given rotten in queue and track number of fresh .
+            for (int j=0;j<n;j++){
+                if (grid[i][j]==2){
+                    q.push({i,j});
+                }
+                else if(grid[i][j]==1) fresh++;
+            }
+        }
+        if(fresh == 0 ) return 0; //If no fresh, return 0 time.
+        while(!q.empty()){
+            time++;
+            int size = q.size();    //Proccess only one set (current)
+            for(int i=0;i<size;i++){
+                auto it = q.front();
+                q.pop();
+                if(it.first-1>=0){  //Check if index inside bounds
+                    if(grid[it.first-1][it.second]==1){
+                        q.push({it.first-1,it.second});
+                        grid[it.first-1][it.second]=2;
+                        fresh--;
+                    }
+                }
+                if(it.first+1<grid.size()){ //Check if index inside bounds
+                    if(grid[it.first+1][it.second]==1){
+                        q.push({it.first+1,it.second});
+                        grid[it.first+1][it.second]=2;
+                        fresh--;
+                    }
+                }
+                if(it.second-1>=0){ //Check if index inside bounds
+                    if(grid[it.first][it.second-1]==1){
+                        q.push({it.first,it.second-1});
+                        grid[it.first][it.second-1]=2;
+                        fresh--;
+                    }
+                }
+                if(it.second+1<grid[0].size()){ //Check if index inside bounds
+                    if(grid[it.first][it.second+1]==1){
+                        q.push({it.first,it.second+1});
+                        grid[it.first][it.second+1]=2;
+                        fresh--;
+                    }
+                }
+                if(fresh==0) return time;    // return time immediately when no fresh left
+            }
+        }
+        
+        return -1; // means some isolated fresh is still there
+    }
+};
