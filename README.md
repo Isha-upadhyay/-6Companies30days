@@ -13,11 +13,11 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 
 ### Participating Companies:
 1. **Microsoft**
-2. **Google**
-3. **Amazon**
-4. **Adobe**
-5. **Flipkart**
-6. **Amazon**
+2. **Amazon**
+3. **Walmart**
+4. **Google**
+5. **Atlassian**
+6. **Goldman Sachs**
 
 ---
 
@@ -26,11 +26,11 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 | **Phase**        | **Company** | **Dates**       | **Questions** |
 |-------------------|-------------|-----------------|---------------|
 | Phase 1          | Microsoft   | Day 1 - Day 5   | 15            |
-| Phase 2          | Google      | Day 6 - Day 10  | 15            |
-| Phase 3          | Amazon      | Day 11 - Day 15 | 15            |
-| Phase 4          | Adobe       | Day 16 - Day 20 | 15            |
-| Phase 5          | Flipkart    | Day 21 - Day 25 | 15            |
-| Phase 6          | Amazon       | Day 26 - Day 30 | 15            |
+| Phase 2          | Anazon      | Day 6 - Day 10  | 15            |
+| Phase 3          | Wakmart      | Day 11 - Day 15 | 15            |
+| Phase 4          | Google       | Day 16 - Day 20 | 15            |
+| Phase 5          | Atlassian    | Day 21 - Day 25 | 15            |
+| Phase 6          | Goldman Sachs      | Day 26 - Day 30 | 15            |
 
 ---
 
