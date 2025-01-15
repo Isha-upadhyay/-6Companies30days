@@ -1,0 +1,56 @@
+------Approch 1 ------
+//DP(Memoization) + Hash Table
+
+class Solution {
+public:
+    bool wordSeperate(string s,   unordered_set<string> &set, vector<int> &memo, int start){
+        if(start == s.size()){
+            return true; // when start become the string size means valid 
+        }
+        if(memo[start] != -1){
+            return memo[start];
+        }
+
+        for(int i=start; i<s.size(); i++){
+            if(set.count(s.substr(start, i+1-start)) && wordSeperate(s, set, memo, i+1)){
+                memo[start] = true;
+                return true;
+            }
+        }
+        return memo[start] = false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<int> memo(s.size(), -1);
+        unordered_set<string> set(wordDict.begin(), wordDict.end());
+        return wordSeperate(s, set, memo, 0); //call the function start = 0
+    }
+};
+
+
+------Approch 1=2 ------
+//DP(Tabulation) + Hash Table
+
+class Solution {
+public:
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool> dp(s.size() + 1, 0);
+        dp[0] = true;
+        unordered_set<string> set(wordDict.begin(), wordDict.end());
+        for(int i=1; i<=s.size(); i++){
+            for(int j=0;j<i;j++){
+                if(dp[j] && set.count(s.substr(j, i-j))){
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.size()];
+    }
+};
+
+
+
+
+
+
