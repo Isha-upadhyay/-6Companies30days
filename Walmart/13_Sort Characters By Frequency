@@ -1,0 +1,52 @@
+           ----------Approch 1----------
+            //Priority queue and hash table 
+
+    class Solution {
+    public:
+    string frequencySort(string s) {
+        unordered_map<char, int> map;
+
+        for(auto ch : s ){
+            map[ch]++;
+        }
+        priority_queue<pair<int, char>> nodes;
+        for(auto [c, freq] : map){
+            nodes.push({freq, c});
+        }
+
+        string ans;
+        while(!nodes.empty()){
+            auto curr = nodes.top();
+            ans += string(curr.first, curr.second);
+            nodes.pop();
+        }
+        return ans;
+        
+    }
+};
+
+----------Approch 2----------
+//Buckt sort and hash table
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char, int> map;
+
+        for(auto ch : s ){
+            map[ch]++;
+        }
+        vector<string> bucket(s.size() + 1, "");
+        for(auto [c, freq] : map){
+            bucket[freq].append(freq, c);
+        }
+
+        string ans;
+        for(int i=s.size(); i>=1;i--){
+            if(!bucket[i].empty())
+            ans.append(bucket[i]);
+        }
+        return ans;
+        
+    }
+};
