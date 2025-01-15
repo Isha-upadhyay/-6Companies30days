@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int minExtraChar(string s, vector<string>& dictionary) {
+       // Create an unordered set for fast look-up of dictionary words.
+        unordered_set<string> set(dictionary.begin(), dictionary.end());
+        
+        // DP array to store the minimum number of extra characters.
+        vector<int> dp(s.size() + 1, 0);
+        
+        // Initialize dp[0] = 0 since there's no extra character for an empty substring.
+        dp[0] = 0;
+        
+        // Iterate through the string to compute the minimum extra characters.
+        for (int i = 1; i <= s.size(); i++) {
+            // Start with assuming that current character is extra.
+            dp[i] = dp[i - 1] + 1;
+            
+            // Check for every possible substring ending at i.
+            for (int j = 0; j < i; j++) {
+                // If s[j...i-1] is in dictionary, update dp[i].
+                if (set.count(s.substr(j, i - j))) {
+                    dp[i] = min(dp[i], dp[j]);
+                }
+            }
+        }
+        
+        // Return the result, which is the minimum extra characters for the entire string.
+        return dp[s.size()];
+    }
+};
