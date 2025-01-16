@@ -36,7 +36,7 @@ The #6Companies30Days challenge is structured into 6 phases, with each phase foc
 
 ## 🌟 Goals
 
-1. Solve **60 DSA questions** in 30 days.
+1. Solve **90 DSA questions** in 30 days.
 2. Focus on company-specific question patterns.
 3. Strengthen core problem-solving and coding skills.
 4. Get ready for technical interviews at top companies.
