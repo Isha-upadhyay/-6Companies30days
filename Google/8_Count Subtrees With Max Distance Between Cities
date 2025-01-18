@@ -1,0 +1,53 @@
+class Solution {
+vector<vector<int>> dist;
+private:
+    int f(int mask, int n){
+        int node = 0;
+        int edge = 0;
+        int maxi = 0;
+
+        for(int i=0; i<n; i++){ // checking if i'th node is included in subset
+            if(((mask>>i)&1)==1){
+                node++;
+                for(int j=i+1; j<n; j++){
+                    if(((mask>>j)&1)==1){ // going to all the next included nodes and calculating diameter
+                        if(dist[i][j]==1) edge++;
+                        maxi = max(maxi, dist[i][j]);
+                    }
+                }
+            }
+        }
+
+        // if complete subtree forms return maximum distance, else return -1
+        if(node==edge+1) return maxi;
+        else return -1;
+    }
+public:
+    vector<int> countSubgraphsForEachDiameter(int n, vector<vector<int>>& edges) {
+
+        dist = vector<vector<int>>(15, vector<int>(15, 1e9));
+        for(auto it: edges){
+            dist[it[0]-1][it[1]-1] = dist[it[1]-1][it[0]-1] = 1;
+        }
+
+        // finding minimum distance between each pair of cities
+        for(int k=0; k<n; k++){
+            for(int i=0; i<n; i++){
+                for(int j=0; j<n; j++){
+                    dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
+                }
+            }
+        }
+
+        vector<int> ans(n-1,0);
+
+        for(int i=0; i<(1<<n); i++){
+            int d = f(i,n);
+            if(d>0){
+                ans[d-1]++;
+            }
+        }
+
+        return ans;
+    }
+};
