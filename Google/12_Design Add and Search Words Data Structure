@@ -1,0 +1,74 @@
+struct Node{
+    bool eow = false;
+    Node* arr[26];
+
+    bool checkIfExists(char c){
+        return arr[c-'a'] != NULL;
+    }
+
+    void assignNew(char c, Node* newNode){
+        arr[c-'a'] = newNode;
+    }
+
+    Node* nextNode(char c){
+        return arr[c-'a'];
+    }
+
+    bool checkIfeow(){
+        return eow;
+    }
+
+    void seteow(){
+        eow = true;
+    }
+};
+
+class WordDictionary {
+private:
+    Node* root;
+public:
+    WordDictionary() {
+        root = new Node();
+    }
+    
+    void addWord(string word) {
+        Node* curr = root;
+        for(auto it: word){
+            if(!curr->checkIfExists(it)) curr->assignNew(it, new Node());
+            curr = curr->nextNode(it);
+        }
+        curr->seteow();
+    }
+
+    bool check(int i, string word, Node* curr){
+        if(i == word.size()){
+            if(curr -> checkIfeow()) return true;
+            return false;
+        }
+        if(word[i] != '.'){
+            if(!curr->checkIfExists(word[i])) return false;
+            Node* newcurr = curr->nextNode(word[i]);
+            return check(i+1, word, newcurr);
+        } else {
+            for(char c = 'a'; c <= 'z'; c++){
+                if(curr->checkIfExists(c)){
+                    Node* newcurr = curr->nextNode(c);
+                    if(check(i+1, word, newcurr)) return true;
+                }
+            }
+            return false;
+        }
+    }
+    
+    bool search(string word) {
+        Node* curr = root;
+        return check(0, word, curr);
+    }
+};
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
