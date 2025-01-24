@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int wordCount(vector<string>& s, vector<string>& t) {
+        int n = t.size();
+        map<string,int> m;
+        for(int i=0;i<n;i++)
+        {
+            sort(t[i].begin(),t[i].end());
+            m[t[i]]++;
+        }
+        int ans=0;
+        
+        for(int i=0;i<s.size();i++)
+        {
+            string tmp = s[i];
+            for(int j=0;j<26;j++)
+            {
+                char ch = 97+j;
+                if(find(tmp.begin(),tmp.end(),ch)==tmp.end())
+                {
+                    string tmp2 = s[i]+(ch);
+                    sort(tmp2.begin(),tmp2.end());
+                    if(m.find(tmp2)!=m.end())
+                    {
+                        ans+=m[tmp2];
+                        m.erase(tmp2);
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
