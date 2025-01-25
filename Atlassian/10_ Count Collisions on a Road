@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int countCollisions(string directions) {
+         vector<pair<char,int>> arr;
+              
+               for(int i=0;i<directions.size();i++){
+                     
+                     int count =1;
+                        while(i+1< directions.size() and directions[i]==directions[i+1]){
+                            i++;
+                            count++;
+                        }
+                         arr.push_back({directions[i],count});
+               }
+                  int ans=0;
+                     for(int i=0;i<arr.size()-1;i++){
+                           
+                            if(arr[i].first=='R' and arr[i+1].first=='L'){
+                                 ans+=arr[i].second + arr[i+1].second;
+                            }
+                            else if(arr[i].first=='S' and arr[i+1].first=='L'){
+                                   ans+=arr[i+1].second;
+                            }
+                              else if(arr[i].first=='R' and arr[i+1].first=='S') {
+                                 ans+= arr[i].second;
+                              }
+                            
+
+                     }
+                         return ans;
+    }
+};
