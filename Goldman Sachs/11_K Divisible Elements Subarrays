@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int countDistinct(vector<int>& nums, int k, int p) {
+        int ans = 0;
+        set<vector<int>> st;
+        for(int i=0;i<nums.size();i++){
+            int cnt = 0;
+            vector<int> vec;
+            for(int j=i;j<nums.size();j++){
+                vec.push_back(nums[j]);
+
+                if(nums[j] % p == 0){
+                    cnt++;
+                }
+                if(cnt>k) break;
+
+                st.insert(vec);
+            }
+        }
+        return st.size();
+    }
+};
